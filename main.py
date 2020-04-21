@@ -1,5 +1,6 @@
 import os
 import base64
+# import html
 
 from flask import Flask, request
 from model import Message 
@@ -31,7 +32,10 @@ def home():
 <div class="message">
 {}
 </div>
-""".format(m.content)
+""".format(m.content.replace('<', '&lt;').replace('>', '&gt;')) 
+# There is a better way to prevent xss attack
+# s = html.escape( """& < " ' >""" )
+
 
     return body 
 
